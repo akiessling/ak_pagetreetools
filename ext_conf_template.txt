@@ -1,0 +1,2 @@
+  # cat=basic; type=boolean; label=The SSL context menu item is automatically added, if the backend runs on SSL. This checkbox enables the item regardless of the lockSSL setting
+enableSslMenuItem =

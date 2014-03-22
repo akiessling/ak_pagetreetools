@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2014-03-21T20:06:40Z" product-name="ak_pagetreetools">
+    <header/>
+    <body>
+      <trans-unit id="setHiddenInMenus">
+        <source>Hide page in menus</source>
+      </trans-unit>
+      <trans-unit id="setVisibleInMenus">
+        <source>Show page in menus</source>
+      </trans-unit>
+      <trans-unit id="setNoForceSsl">
+        <source>Do not force SSL</source>
+      </trans-unit>
+      <trans-unit id="setForceSsl">
+        <source>Force SSL</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
