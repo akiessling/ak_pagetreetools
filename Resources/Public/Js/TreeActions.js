@@ -54,4 +54,32 @@ Ext.onReady(function() {
             );
         }
     });
+
+    Ext.apply(TYPO3.Components.PageTree.Actions, {
+        setExcludeFromSearch: function(node, tree) {
+            TYPO3.AkPagetreetools.ClickmenuAction.setExcludeFromSearch(
+                node.attributes.nodeData,
+                function(response) {
+                    if (this.evaluateResponse(response)) {
+                        this.updateNode(node, node.isExpanded(), response);
+                    }
+                },
+                this
+            );
+        }
+    });
+
+    Ext.apply(TYPO3.Components.PageTree.Actions, {
+        setIncludeInSearch: function(node, tree) {
+            TYPO3.AkPagetreetools.ClickmenuAction.setIncludeInSearch(
+                node.attributes.nodeData,
+                function(response) {
+                    if (this.evaluateResponse(response)) {
+                        this.updateNode(node, node.isExpanded(), response);
+                    }
+                },
+                this
+            );
+        }
+    });
 });

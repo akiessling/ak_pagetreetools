@@ -15,6 +15,12 @@
       <trans-unit id="setForceSsl">
         <source>Force SSL</source>
       </trans-unit>
+      <trans-unit id="setExcludeFromSearch">
+        <source>Exclude from search</source>
+      </trans-unit>
+      <trans-unit id="setIncludeInSearch">
+        <source>Include in search</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

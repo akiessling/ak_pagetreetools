@@ -127,6 +127,51 @@ class ClickMenuAction extends Commands {
         return $returnValue;
     }
 
+    /**
+     * Set url_scheme to default for a page
+     *
+     * @param \stdClass $nodeData
+     * @return string Error message for the BE user
+     */
+    public function setExcludeFromSearch($nodeData) {
+        try {
+            /* @var $node PagetreeNode */
+            $node = GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Tree\\Pagetree\\PagetreeNode', (array) $nodeData);
+
+            $data['pages'][$node->getWorkspaceId()]['no_search'] = 1;
+            $returnValue = $this->saveData($node, $data);
+        } catch (\Exception $e) {
+            $returnValue = array(
+                'success' => FALSE,
+                'message' => $e->getMessage()
+            );
+        }
+
+        return $returnValue;
+    }
+
+    /**
+     * Set url_scheme to default for a page
+     *
+     * @param \stdClass $nodeData
+     * @return string Error message for the BE user
+     */
+    public function setIncludeInSearch($nodeData) {
+        try {
+            /* @var $node PagetreeNode */
+            $node = GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Tree\\Pagetree\\PagetreeNode', (array) $nodeData);
+
+            $data['pages'][$node->getWorkspaceId()]['no_search'] = 0;
+            $returnValue = $this->saveData($node, $data);
+        } catch (\Exception $e) {
+            $returnValue = array(
+                'success' => FALSE,
+                'message' => $e->getMessage()
+            );
+        }
+
+        return $returnValue;
+    }
 
 
     /**
@@ -153,19 +198,19 @@ class ClickMenuAction extends Commands {
             options.contextMenu.table.pages.items {
                 540 = ITEM
                 540 {
-                    name = setHiddenInMenu
+                    name = hideInMenu
                     label = LLL:EXT:ak_pagetreetools/Resources/Private/Language/locallang_cm:setHiddenInMenus
                     spriteIcon = apps-pagetree-page-not-in-menu
                     callbackAction = setHiddenInMenus
-                    displayCondition = getRecord|nav_hide = 0
+                    displayCondition = getRecord|nav_hide = 0 && canEditHideInMenu = 1
                 }
                 541 = ITEM
                 541 {
-                    name = setVisibleInMenus
+                    name = hideInMenu
                     label = LLL:EXT:ak_pagetreetools/Resources/Private/Language/locallang_cm:setVisibleInMenus
                     spriteIcon = apps-pagetree-page-not-in-menu
                     callbackAction = setVisibleInMenus
-                    displayCondition = getRecord|nav_hide = 1
+                    displayCondition = getRecord|nav_hide = 1 && canEditHideInMenu = 1
                 }
             }
         ';
@@ -181,22 +226,43 @@ class ClickMenuAction extends Commands {
             options.contextMenu.table.pages.items {
                 542 = ITEM
                 542 {
-                    name = setNoForceSsl
+                    name = urlScheme
                     label = LLL:EXT:ak_pagetreetools/Resources/Private/Language/locallang_cm:setNoForceSsl
                     icon = ../typo3conf/ext/ak_pagetreetools/Resources/Public/Icons/lock_open.png
                     callbackAction = setNoForceSsl
-                    displayCondition = getRecord|url_scheme = 2
+                    displayCondition = getRecord|url_scheme = 2 && canEditUrlScheme = 1
                 }
                 543 = ITEM
                 543 {
-                    name = setForceSsl
+                    name = urlScheme
                     label = LLL:EXT:ak_pagetreetools/Resources/Private/Language/locallang_cm:setForceSsl
                     spriteIcon = status-status-locked
                     callbackAction = setForceSsl
-                    displayCondition = getRecord|url_scheme < 2
+                    displayCondition = getRecord|url_scheme < 2 && canEditUrlScheme = 1
                 }
             }
         ';
         }
+
+        $GLOBALS['TYPO3_CONF_VARS']['BE']['defaultUserTSconfig'] .= '
+            options.contextMenu.table.pages.items {
+                544 = ITEM
+                544 {
+                    name = excludeFromSearch
+                    label = LLL:EXT:ak_pagetreetools/Resources/Private/Language/locallang_cm:setExcludeFromSearch
+                    icon = ../typo3conf/ext/ak_pagetreetools/Resources/Public/Icons/magnifier_zoom_out.png
+                    callbackAction = setExcludeFromSearch
+                    displayCondition = getRecord|no_search = 0 && canEditNoSearch = 1
+                }
+                545 = ITEM
+                545 {
+                    name = excludeFromSearch
+                    label = LLL:EXT:ak_pagetreetools/Resources/Private/Language/locallang_cm:setIncludeInSearch
+                    icon = ../typo3conf/ext/ak_pagetreetools/Resources/Public/Icons/magnifier_zoom_in.png
+                    callbackAction = setIncludeInSearch
+                    displayCondition = getRecord|no_search = 1 && canEditNoSearch = 1
+                }
+            }
+        ';
     }
 }

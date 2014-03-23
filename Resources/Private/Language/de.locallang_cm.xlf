@@ -19,6 +19,12 @@
         <source>Force SSL</source>
         <target>SSL nicht erforderlich</target>
       </trans-unit>
+      <trans-unit id="setExcludeFromSearch">
+        <source>Von Suche ausschließen</source>
+      </trans-unit>
+      <trans-unit id="setIncludeInSearch">
+        <source>In Suche einschließen</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
