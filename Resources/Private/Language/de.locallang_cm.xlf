@@ -13,11 +13,11 @@
       </trans-unit>
       <trans-unit id="setNoForceSsl">
         <source>Do not force SSL</source>
-        <target>Erzwinge SSL</target>
+        <target>SSL nicht erforderlich</target>
       </trans-unit>
       <trans-unit id="setForceSsl">
         <source>Force SSL</source>
-        <target>SSL nicht erforderlich</target>
+        <target>Erzwinge SSL</target>
       </trans-unit>
       <trans-unit id="setExcludeFromSearch">
         <source>Von Suche ausschließen</source>
